@@ -33,7 +33,7 @@ locals {
     "frontend" = {
       image_tag_mutability  = "IMMUTABLE"
       scan_on_push          = true
-      expiration_after_days = 7
+      expiration_after_days = 3
       environment           = "dev"
       tags = {
         Project     = "ECRDemo"
@@ -46,8 +46,8 @@ locals {
     "backend" = {
       image_tag_mutability  = "IMMUTABLE"
       scan_on_push          = true
-      expiration_after_days = 7
       environment           = "dev"
+      expiration_after_days = 0 # no expiration policy set
       tags = {
         Project     = "ECRDemo"
         Owner       = "anotherbuginthecode"
@@ -78,7 +78,7 @@ locals {
 
 
 # multiple ecr
-module "multiple-ecr" {
+module "ecr" {
   source   = "./modules/ecr"
   for_each = local.repositories
 
